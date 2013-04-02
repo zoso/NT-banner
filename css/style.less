@@ -24,16 +24,32 @@ img {
 }
 
 #wrapper {
-	width: 1024px;
+	width: @canvas-width;
 	margin: 0 auto;
 }
 
 #backgroundContainer {
-	
-	
+	position: absolute;
+	margin-top: 110px;
 	width: 100%;
-	min-width: 1224px;
+	min-width: 1024px;
 	background: url(../img/banner_bg.jpg) 50% 0 no-repeat;
 	background-color: @bgColor;
 	height: 450px;
+	
 }
+
+#gfxContainer {
+	position: absolute;
+	width: 80%;
+	height: 450px;
+	margin-left: (1280-@canvas-width)/2px;
+	.border();
+}
+
+#stats {
+	position: relative;
+	margin-top: 450px;
+}
+
+

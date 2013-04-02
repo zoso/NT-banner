@@ -1,4 +1,6 @@
 body{margin:0;padding:0;}
 img{border:none;}
-#wrapper{width:1024px;margin:0 auto;}
-#backgroundContainer{width:100%;min-width:1224px;background:url(../img/banner_bg.jpg) 50% 0 no-repeat;background-color:#179bd9;height:450px;}
+#wrapper{width:940px;margin:0 auto;}
+#backgroundContainer{position:absolute;margin-top:110px;width:100%;min-width:1024px;background:url(../img/banner_bg.jpg) 50% 0 no-repeat;background-color:#179bd9;height:450px;}
+#gfxContainer{position:absolute;width:80%;height:450px;margin-left:170px;border:1px solid #000;}
+#stats{position:relative;margin-top:450px;}
