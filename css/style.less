@@ -1,0 +1,39 @@
+.border() {
+	border: 1px solid #000;
+}
+
+
+@canvas-width: 940px;
+@light-blue: #048fd4;
+@din-font: "ff-din-web",sans-serif;
+@bgColor: #179bd9;
+
+@spriteGrid: 50px;
+.sprite(@x, @y) {
+   background: url(../img/stars/stars.png) no-repeat;
+   background-position: -(@x*@spriteGrid) -(@y*@spriteGrid);
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+img {
+	border: none;
+}
+
+#wrapper {
+	width: 1024px;
+	margin: 0 auto;
+}
+
+#backgroundContainer {
+	
+	
+	width: 100%;
+	min-width: 1224px;
+	background: url(../img/banner_bg.jpg) 50% 0 no-repeat;
+	background-color: @bgColor;
+	height: 450px;
+}
