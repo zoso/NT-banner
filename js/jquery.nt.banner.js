@@ -76,14 +76,14 @@ $(document).ready(function() {
 
 	(function loop() {
     	setTimeout(function () {
-	        /* logic to execute here */
-	        if (i < (textArr.length-1)) {
+	        gfx.html('<img src="'+menuArr[i].img+'" />' + " > "+i);
+	        if (i < (menuArr.length-1)) {
 				i = i+1;
 			} else {
 				i = 0;
 			}
 			//console.log("> i "+i+" > "+textArr.length);
-			gfx.html(textArr[i] + " > "+i);
+			
 	        loop();
 	    }, 1000);
 	})();
