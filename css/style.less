@@ -41,10 +41,9 @@ img {
 
 #gfxContainer {
 	position: absolute;
-	width: 80%;
+	/*width: 100%;*/
 	height: 450px;
-	margin-left: (1280-@canvas-width)/2px;
-	.border();
+	/*margin-left: (1280-@canvas-width)/2px;*/
 }
 
 #stats {
@@ -52,4 +51,183 @@ img {
 	margin-top: 450px;
 }
 
+.menuItem {
+	width: 270px;
+	height: 270px;
+	position: absolute;
+	/*cursor: pointer;*/
+	opacity: 0;	
+}
+
+.menuItem-over {
+	opacity: 0.3;
+	.img {
+		margin-top: 3px;
+		margin-left: 3px;
+	}
+}
+
+.menuItem-btn {
+	position: absolute;
+	width: 200px;
+	height: 100px;
+	z-index: 1000;
+}
+
+.play-btn {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	background: url(../img/play_btn.png) 0 0 no-repeat;
+}
+
+.play-txt {
+	font-size: 14px;
+	position: absolute;
+	
+	top: 30px;
+	
+	width: 200px;
+	//line-height: 100px;
+	color: #fff;
+	font-family: @din-font;
+	font-style: normal;
+	font-weight: 900;
+}
+
+.play-txt-left {
+	left: -205px;
+	text-align: right;
+}
+
+.play-txt-right {
+	left: 110px;
+	text-align: left;
+}
+
+.play-txt a:visited,
+.play-txt a:active,
+.play-txt a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.play-txt a:hover {
+	color: @light-blue;
+}
+
+
+/* stars */
+.star_small {
+	width: @spriteGrid;
+	height: @spriteGrid;
+	position: absolute;
+	.sprite(0,0);
+	//background: url(../img/stars/star_small.png) no-repeat;
+	
+}
+
+.star_small1 {
+	width: @spriteGrid;
+	height: @spriteGrid;
+	position: absolute;
+	.sprite(1,0);
+}
+
+.star_small2 {
+	width: @spriteGrid;
+	height: @spriteGrid;
+	position: absolute;
+	.sprite(2,0);
+}
+
+.star_small3 {
+	width: @spriteGrid;
+	height: @spriteGrid;
+	position: absolute;
+	.sprite(3,0);
+}
+
+.star_small4 {
+	width: @spriteGrid;
+	height: @spriteGrid;
+	position: absolute;
+	.sprite(4,0);
+}
+
+.star_small5 {
+	width: @spriteGrid;
+	height: @spriteGrid;
+	position: absolute;
+	.sprite(5,0);
+}
+
+.star_small6 {
+	width: @spriteGrid;
+	height: @spriteGrid;
+	position: absolute;
+	.sprite(6,0);
+}
+
+.star_small7 {
+	width: @spriteGrid;
+	height: @spriteGrid;
+	position: absolute;
+	.sprite(0,1);
+}
+
+.star_small8 {
+	width: @spriteGrid;
+	height: @spriteGrid;
+	position: absolute;
+	.sprite(1,1);
+}
+
+.star_small9 {
+	width: @spriteGrid;
+	height: @spriteGrid;
+	position: absolute;
+	.sprite(2,1);
+}
+
+.star_small10 {
+	width: @spriteGrid;
+	height: @spriteGrid;
+	position: absolute;
+	.sprite(3,1);
+}
+
+.star_small11 {
+	width: @spriteGrid;
+	height: @spriteGrid;
+	position: absolute;
+	.sprite(4,1);
+}
+
+.star_small12 {
+	width: @spriteGrid;
+	height: @spriteGrid;
+	position: absolute;
+	.sprite(5,1);
+}
+
+.star_small13 {
+	width: @spriteGrid;
+	height: @spriteGrid;
+	position: absolute;
+	.sprite(6,1);
+}
+
+.star_cluster {
+	width: 399px;
+	height: 270px;
+	position: absolute;
+	background: url(../img/stars/star_small4.png) no-repeat;
+}
+
+.starsContainer {
+	position: absolute; 
+	top: 0; 
+	left: 0;
+}
 

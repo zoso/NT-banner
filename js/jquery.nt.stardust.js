@@ -1,11 +1,22 @@
 (function($){
     
-    function render() {
-        setTimeout(render, 200);
-        console.log(".......");
-    }
+   
 
-    var classArr = ["star_small", "star_small1", "star_small2", "star_small3", "star_small4", "star_small5", "star_small6", "star_small7", "star_small8"];
+    var classArr = ["star_small", 
+                    "star_small1", 
+                    "star_small2", 
+                    "star_small3", 
+                    "star_small4", 
+                    "star_small5", 
+                    "star_small6", 
+                    "star_small7", 
+                    "star_small8",
+                    "star_small9",
+                    "star_small10",
+                    "star_small11",
+                    "star_small12",
+                    "star_small13"
+                    ];
     
     function getClass() {
         var r = randomNr(0,classArr.length-1);
@@ -15,9 +26,10 @@
     var starArr = [];
     function addStars(el, x, y) {
         var ant = randomNr(10, 50);
+        
         starArr = [];
-        var startLeft = x - 50;//263/2;
-        var startTop = y - 50; //50 = size of sprite
+        var startLeft = x;//263/2;
+        var startTop = y; //50 = size of sprite
         var str = '<div class="starsContainer">';
         for (var i = 0; i < ant; i++) {
             var l = randomNr(-10, 200);
@@ -27,7 +39,7 @@
             //str += '<div class="'+getClass()+'" style="left: '+l+'px; top: '+l+'px;">&nbsp;</div>';
             str += '<div class="'+c+'" style="left: '+startLeft+'px; top: '+startTop+'px;">&nbsp;</div>';
         }
-        str += '<div class="star_cluster" style="left: -150px; top: 50px;"></div>';
+        //str += '<div class="star_cluster" style="left: -150px; top: 50px;"></div>';
         str += '</div>';
         //console.log("addStars "+ant+" > "+str);
         el.append(str);
@@ -47,7 +59,13 @@
             $(elm).animate({
                 left: starArr[i].left+"px",
                 top: starArr[i].top+"px"
-            }, randomNr(100, 2000))
+            }, randomNr(100, 2000), function() {
+                $(this).animate({
+                    opacity: 0,
+                    left: randomNr(0, 270),
+                    top: -100
+                })
+            })
         });
 
 
@@ -102,9 +120,14 @@
     $.fn.stardust = function(settings) {
         defaultSettings = $.extend({}, defaultSettings, settings || {});
         element = this;
+        // var parentOffset = $(this).offset();
+        //         //render();
+        //         var x = 0;//Math.round(parentOffset.left);
+        //         var y = 300;//randomNr(0, 270);//Math.round(parentOffset.top);
+        //         addStars($(this), x, y);
         element.hover(
             function(e) {
-                var parentOffset = $(this).parent().offset();
+                var parentOffset = $(this).offset();
                 //render();
                 var x = Math.round(e.pageX-parentOffset.left);
                 var y = Math.round(e.pageY-parentOffset.top);

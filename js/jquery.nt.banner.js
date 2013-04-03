@@ -13,7 +13,7 @@ $(document).ready(function() {
 			height: 263,
 			width: 263,
 			url: "#familie",
-			pos: [170, 600, 50, -50],
+			pos: [0, 600, 50, -50],
 			txt: "Lottofamilien"
 		},
 		{
@@ -29,7 +29,7 @@ $(document).ready(function() {
 			height: 263,
 			width: 263,
 			url: "#gull",
-			pos: [260,0, 50, 200],
+			pos: [0,0, 50, 200],
 			txt: "Årets kommisjonær"
 		},
 		{
@@ -42,53 +42,130 @@ $(document).ready(function() {
 		}
 	];
 
-	//test
-	var speed1 = 200;
-	var speed2 = 1000;
+	
 	var playPtn = (263-100)/2;
+	var w = $(window).width();
 	
 	var randomNr = function(min, max) {
         return Math.floor(Math.random() * (max - (min) + 1)) + (min);
     }
 
-	function getPlayBtnPos() {
-		var arr = [randomNr(0, 100), randomNr(0, 100)];
-		return arr;
-	}
-
 	var bc = $("#bannerContainer");
 	var gfx = $("#gfxContainer");
-
-	var textArr = ["dette er første", "dette er andre (2)", "tredje kommer her"];
 	var i = 0;
+	var loopEnabled = true;
+	var timer = null;
 
-	/*var rotate = function() {
-		if (i <= (textArr.length-1)) {
-			i = i+1;
-		} else {
-			i = 0;
-		}
-		//console.log("> i "+i+" > "+textArr.length);
-		gfx.html(textArr[i] + " > "+i);
-		setInterval(rotate, 2000);
-	}
-	rotate();*/
 
-	(function loop() {
+	/*(function loop() {
     	setTimeout(function () {
-	        gfx.html('<img src="'+menuArr[i].img+'" />' + " > "+i);
-	        if (i < (menuArr.length-1)) {
-				i = i+1;
-			} else {
-				i = 0;
+    		console.log("loopEnabled "+loopEnabled);
+    		if (loopEnabled) {
+	    		if (i < (menuArr.length-1)) {
+	    			i++;
+	    		} else {
+	    			i = 0;
+	    		}
+	    		imageLoop(i);
+	    		//console.log(i+" "+menuArr.length);
+	        }
+	        loop();	
+	    }, 3000);
+	})();*/
+	
+	function loop() {
+		if (loopEnabled) {
+    		if (i < (menuArr.length-1)) {
+    			i++;
+    		} else {
+    			i = 0;
+    		}
+    		imageLoop(i);
+    		//console.log(i+" "+menuArr.length);
+        }
+	}
+
+	var imageLoop = function(i) {
+		var top = 450-270;
+		var left = w - 270;
+		var t = randomNr(-100, 0);
+		var l = randomNr(0, left);
+		var str = '<div class="menuItem" style="top: '+t+'px; left: '+l+'px;">';
+			str += '<div class="img"><img src="'+menuArr[i].img+'" /></div>';
+			str += '</div>';
+		gfx.html(str);
+		$(".menuItem").stardust();
+
+		/*$(".menuItem").animate({
+			opacity: 1,
+			top: top-50,
+		}, 1000, function() {
+			$(this).animate({
+				opacity: 0,
+				top: top
+			}, 1000)
+		});*/
+		
+		/*$(".menuItem").animate({
+			opacity: 1,
+			top: top-50
+		}, 1000).delay(1000).animate({
+			opacity: 0,
+			top: top
+		}, 1000);
+
+		$(".menuItem").hover(
+			function() {
+				$(this).stop();
+				loopEnabled = false;
+			},
+			function() {
+				loopEnabled = true;
 			}
-			//console.log("> i "+i+" > "+textArr.length);
-			
-	        loop();
-	    }, 1000);
-	})();
+		)*/
 
+		/*
+		jQuery('#viewport').on({
+		    mouseenter: function() {
+		        clearInterval( $(this).data('timer') );
+		    },
+		    mouseleave: function() {
+		        $(this).data('timer', setInterval(function () {
+		            jQuery('#next').trigger('click');
+		        }, 1000));
+		    }
+		}).trigger('mouseleave');
+		*/
+		
+		
+		moveImg($(".menuItem"));
 
+		$(".menuItem").hover(
+			function() {
+				clearInterval(timer);
+				loopEnabled = false;
+			},
+			function() {
+				moveImg($(this));
+				loopEnabled = true;
+				timer = setInterval(loop, 3000);
+			}
+		)
+	}
+
+	timer = setInterval(loop, 3000);
+
+	var moveImg = function($el) {
+		$el.animate({
+			opacity: 1,
+			top: 200,
+		}, 1000, function() {
+			$(this).animate({
+				opacity: 0,
+				top: top
+			}, 1000)
+		})
+	}
 	/*for (var i = 0; i < menuArr.length; i++) {
 		var l = menuArr[i].pos[1];
 		var t = menuArr[i].pos[0];
