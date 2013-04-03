@@ -55,18 +55,12 @@ function onEnterFrame(event:Event):void {
     moon.x =  Math.sin(sinMoon * orbitSpeed2) * earthOrbitDiameter + earthGravityX;
     moon.y = Math.cos(cosMoon * orbitSpeed2) * earthOrbitDiameter + earthGravityY;
 }
-
-
-
 */
 
 $(document).ready(function() {
-	var angle = 0;
-	var centerX = 940/2;
-	var centerY = 450/2;
-	var radius = 80;
-	var speed = 1;
-	var a2 = 0;
+	var dim = 270;
+
+
 	var w = $(window).width();
 	var menuArr = [
 		{
@@ -110,71 +104,92 @@ $(document).ready(function() {
 			pos: [0,0, 50, 200],
 			txt: "Årets kommisjonær"
 		}
-		/*,
-		{
-			img: "img/hadjik_round_img.png",
-			height: 263,
-			width: 263,
-			url: "#Hadjik",
-			pos: [250, 330, 50, -50],
-			txt: "Selveste ski-filmen"
-		}*/
 	];
 	var gfx = $("#gfxContainer");
-	var speeder = 500;
+	var sin = 0;
+	var cos = 0;
+	var orbitSpeed = 10;
+	var speeder = 200;
+	var angle = 0;
+	var speed = 2;
+	var a2 = 0;
 	var init = function() {
 		for (var i = 0; i < menuArr.length; i++) {
-			var top = centerY/2 + (Math.sin(a2) * 200);
-			var left = w/10 + (i * 180);//centerX + Math.sin(angle) * radius;
+			var top = 250/2 + (Math.cos(a2) * 100);
+			var left = w/10 + (i * 280);//centerX + Math.sin(angle) * radius;
 			a2 += speed;
-			console.log(top+ " > "+left)
-			//var t = randomNr(-100, 0);
-			//var l = randomNr(0, left);
 			var str = '<div class="menuItem" style="top: '+top+'px; left: '+left+'px; opacity: 1">';
 				str += '<div class="img"><img src="'+menuArr[i].img+'" /></div>';
 				str += '</div>';
 			gfx.append(str);
 		}
 
-		var randomNr = function(min, max) {
-	        return Math.floor(Math.random() * (max - (min) + 1)) + (min);
-	    }
-		
-		var loop = function() {
-			gfx.find(".menuItem").each(function() {
-				//$(this).stardust();
-				var l = (centerX+100) + Math.cos(angle) * 720;
-				if (l > 940) l = (940-270);
-				if (l < 0) l = 10;
-				var t = centerY/2 + Math.sin(angle) * randomNr(0, 100);
-				var r = randomNr(0, 10);
-				var o = 1 - (r/10);
-
-				$("#log").html("t: "+t+" > "+l+" > "+o);
-				$(this).animate({
-					top: t,
-					left: l,
-					"z-index": r,
-					opacity: o 
-				})
-				angle += speed;
-			})
-		}
-		//var timer = setInterval(loop, speeder);
 		$(".menuItem").hover(
-			function() {
-				$(this).css({
-					"z-index": 10
-				});
-				//clearInterval(timer);
-			}, 
-			function() {
-				//timer = setInterval(loop, speeder);
-				$(this).css({
-					"z-index": 1
-				});
-			}
+		function() {
+			$(this).css({
+				"z-index": 10
+			});
+			//clearInterval(timer);
+		}, 
+		function() {
+			//timer = setInterval(loop, speeder);
+			$(this).css({
+				"z-index": 1
+			});
+		}
 		)
 	}
+
+	function SVG(tag) {
+	   return document.createElementNS('http://www.w3.org/2000/svg', tag);
+	}
+
+	var $svg = $('#circles');
+	$(SVG('circle'))
+		.attr('cx', 130)
+	    .attr('cy', 75)
+	    .attr('r', 50)
+	    .attr('fill', 'white')
+	    .attr('opacity', '0,6')
+	    .appendTo($svg);
+
+	$("#circle").animate({
+		'cx': 200
+	}, 2000);
+
+	var randomNr = function(min, max) {
+        return Math.floor(Math.random() * (max - (min) + 1)) + (min);
+    }
+	
+	var loop = function() {
+		var i = 0;
+		gfx.find(".menuItem").each(function() {
+			//$(this).stardust();
+			sin += .002;
+			cos += .002;
+			var l =  Math.sin(sin * orbitSpeed) * dim + 100 * i;
+			var t = Math.cos(cos * orbitSpeed) * dim + 100 * i;
+			i++;
+			/*var l = (centerX+100) + Math.cos(angle) * 720;
+			if (l > 940) l = (940-270);
+			if (l < 0) l = 10;
+			var t = centerY/2 + Math.sin(angle) * randomNr(0, 100);
+			*/var r = randomNr(0, 10);
+			var o = 1;//1 - (r/10);
+
+			$("#log").html("t: "+t+" > "+l+" > "+o);
+			$(this).animate({
+				top: t,
+				left: l,
+				"z-index": r,
+				opacity: o 
+			})
+			angle += speed;
+		})
+	}
+	
+	//var timer = setInterval(loop, speeder);
+	
+
 	init();
 });
