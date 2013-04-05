@@ -106,6 +106,13 @@ $(document).ready(function() {
 		}
 	];
 	var gfx = $("#gfxContainer");
+	var stars = $("#starsContainer");
+
+
+	stars.stardustBG({ant: 400});
+
+
+
 	var sin = 0;
 	var cos = 0;
 	var orbitSpeed = 10;
@@ -115,15 +122,15 @@ $(document).ready(function() {
 	var a2 = 0;
 	var init = function() {
 		for (var i = 0; i < menuArr.length; i++) {
-			var top = 250/2 + (Math.cos(a2) * 100);
-			var left = w/10 + (i * 280);//centerX + Math.sin(angle) * radius;
+			var top = 250/4 + (Math.cos(a2) * 100);
+			var left = w/10 + (i * 180);//centerX + Math.sin(angle) * radius;
 			a2 += speed;
 			var str = '<div class="menuItem" style="top: '+top+'px; left: '+left+'px; opacity: 1">';
 				str += '<div class="img"><img src="'+menuArr[i].img+'" /></div>';
 				str += '</div>';
 			gfx.append(str);
 		}
-
+		$(".menuItem").stardust();
 		$(".menuItem").hover(
 		function() {
 			$(this).css({
@@ -144,6 +151,7 @@ $(document).ready(function() {
 	   return document.createElementNS('http://www.w3.org/2000/svg', tag);
 	}
 
+	/*
 	var $svg = $('#circles');
 	$(SVG('circle'))
 		.attr('cx', 130)
@@ -156,7 +164,7 @@ $(document).ready(function() {
 	$("#circle").animate({
 		'cx': 200
 	}, 2000);
-
+	*/
 	var randomNr = function(min, max) {
         return Math.floor(Math.random() * (max - (min) + 1)) + (min);
     }

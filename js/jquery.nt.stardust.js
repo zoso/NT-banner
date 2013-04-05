@@ -110,13 +110,33 @@
 
     //Default settings
     var defaultSettings = {
-        
+        ant: 200
     };
 
     //init
     var element;
     var speed = 2000;
     var ok = true;
+
+    $.fn.stardustBG = function(settings) {
+        defaultSettings = $.extend({}, defaultSettings, settings || {});
+        var ant = settings.ant;
+        var w = $(window).width();
+        var startLeft = 0;//263/2;
+        var startTop = 0; //50 = size of sprite
+        var str = '';
+        for (var i = 0; i < ant; i++) {
+            var l = randomNr(10, (w-80));
+            var t = randomNr(10, 440);
+            var c = getClass();
+            //starArr.push({left: l, top: t, star: c});
+            //str += '<div class="'+getClass()+'" style="left: '+l+'px; top: '+l+'px;">&nbsp;</div>';
+            str += '<div class="'+c+'" style="position: absolute; left: '+l+'px; top: '+t+'px;">&nbsp;</div>';
+        }
+        //str += '<div class="star_cluster" style="left: -150px; top: 50px;"></div>';
+        this.append(str);
+    }
+
     $.fn.stardust = function(settings) {
         defaultSettings = $.extend({}, defaultSettings, settings || {});
         element = this;
