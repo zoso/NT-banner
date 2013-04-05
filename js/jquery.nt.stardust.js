@@ -110,34 +110,81 @@
 
     //Default settings
     var defaultSettings = {
-        
+        ant: 200,
+        loop: false
     };
 
     //init
+    $.fn.stardustBG = function(settings) {
+        defaultSettings = $.extend({}, defaultSettings, settings || {});
+        var container = this;
+        var w = $(window).width();
+        var startLeft = randomNr(10, (w-100));
+        var startTop = 450; 
+        var str = '';
+        var o = 1;
+        if (defaultSettings.loop == true) {
+            o = 0;
+        }
+        for (var i = 0; i < defaultSettings.ant; i++) {
+            var l = randomNr(10, (w-100));
+            var t = randomNr(0, 400);
+            var c = getClass();
+            str += '<div class="'+c+'" style="left: '+l+'px; top: '+t+'px; opacity: '+o+'">&nbsp;</div>';
+        }
+        container.append(str);
+        
+        var starloop = function() {
+            container.children().each(function(i){
+                if ($(this).attr('style').indexOf('left') > -1) {
+                    //$(this).css('left', 100);
+                    var l = parseInt($(this).css('left'));
+                    var t = parseInt($(this).css('top'));
+                    var r = randomNr(-50, 50);
+                    $(this).animate({
+                        left: l+(r),
+                        top: t+(r)
+                    }, randomNr(10, 3000))
+                    //console.log("-> "+$(this).css('left'))
+                }
+            });
+        }
+        if (defaultSettings.loop == true)
+            var loopTimer = setInterval(starloop, 4000);
+    }
+
+
+
     var element;
     var speed = 2000;
     var ok = true;
-    $.fn.stardust = function(settings) {
-        defaultSettings = $.extend({}, defaultSettings, settings || {});
+    $.fn.stardust = function() {
         element = this;
         // var parentOffset = $(this).offset();
-        //         //render();
-        //         var x = 0;//Math.round(parentOffset.left);
-        //         var y = 300;//randomNr(0, 270);//Math.round(parentOffset.top);
-        //         addStars($(this), x, y);
-        element.hover(
+        // render();
+        // var x = 0;//Math.round(parentOffset.left);
+        // var y = 300;//randomNr(0, 270);//Math.round(parentOffset.top);
+        // addStars($(this), x, y);
+        /*element.hover(
             function(e) {
                 var parentOffset = $(this).offset();
-                //render();
                 var x = Math.round(e.pageX-parentOffset.left);
                 var y = Math.round(e.pageY-parentOffset.top);
                 addStars($(this), x, y);    
             }, 
             function(e) {
-                //console.log("out");
                 removeStars($(this));
             }
-        );
+        );*/
+        element.mouseenter(function(e) {
+            var parentOffset = $(this).offset();
+            var x = Math.round(e.pageX-parentOffset.left)-20;
+            var y = Math.round(e.pageY-parentOffset.top)-20;
+            addStars($(this), x, y); 
+        });
+        element.mouseleave(function(e) {
+            removeStars($(this));
+        });
     }
     
         

@@ -57,6 +57,8 @@ function onEnterFrame(event:Event):void {
 }
 */
 
+
+
 $(document).ready(function() {
 	var dim = 270;
 
@@ -67,7 +69,7 @@ $(document).ready(function() {
 			img: "img/danser_round_img.png",
 			height: 263,
 			width: 263,
-			pos: [-30,730, 50, -50],
+			pos: [-30,690, 50, -50],
 			url: "#danser",
 			txt: "Magedanserinnen"
 		},
@@ -76,7 +78,7 @@ $(document).ready(function() {
 			height: 263,
 			width: 263,
 			url: "#familie",
-			pos: [0, 600, 50, -50],
+			pos: [90, 560, 50, -50],
 			txt: "Lottofamilien"
 		}
 		,
@@ -85,7 +87,7 @@ $(document).ready(function() {
 			height: 263,
 			width: 263,
 			url: "#Hadjik",
-			pos: [250, 330, 50, -50],
+			pos: [250, 430, 50, -50],
 			txt: "Selveste ski-filmen"
 		},
 		{
@@ -93,7 +95,7 @@ $(document).ready(function() {
 			height: 263,
 			width: 263,
 			url: "#odds",
-			pos: [-50, 400, 100, 200],
+			pos: [-50, 500, 100, 200],
 			txt: "Årets ildsjel"
 		},
 		{
@@ -101,7 +103,7 @@ $(document).ready(function() {
 			height: 263,
 			width: 263,
 			url: "#gull",
-			pos: [0,0, 50, 200],
+			pos: [100, 450, 50, 200],
 			txt: "Årets kommisjonær"
 		}
 	];
@@ -109,22 +111,30 @@ $(document).ready(function() {
 	var sin = 0;
 	var cos = 0;
 	var orbitSpeed = 10;
-	var speeder = 200;
+	var speeder = 3000;
 	var angle = 0;
 	var speed = 2;
 	var a2 = 0;
+	var isLooping = true;
+	var timer = null;
+	var playPtn = (263-100)/2;
 	var init = function() {
 		for (var i = 0; i < menuArr.length; i++) {
-			var top = 250/2 + (Math.cos(a2) * 100);
-			var left = w/10 + (i * 280);//centerX + Math.sin(angle) * radius;
-			a2 += speed;
-			var str = '<div class="menuItem" style="top: '+top+'px; left: '+left+'px; opacity: 1">';
+			//var top = 250/4 + (Math.sin(a2) * 100);
+			//var left = w/10 + (i * 180);//centerX + Math.sin(angle) * radius;
+			//a2 += speed;
+			var top = menuArr[i].pos[0];
+			var left = menuArr[i].pos[1];
+			var str = '<a href="#"><div data-nr="'+i+'" class="menuItem" style="top: '+top+'px; left: '+left+'px; opacity: 0.1;">';
+				str += '<div class="menuItem-btn" data-nr="'+i+'" style="opacity: 0; top: '+menuArr[i].pos[2]+'px; left: '+menuArr[i].pos[3]+'px;">';
+				str += '<div class="play-btn">&nbsp;</div>';
+				str += '<div class="play-txt play-txt-right">'+menuArr[i].txt+'<br>Se film</div></div>';
 				str += '<div class="img"><img src="'+menuArr[i].img+'" /></div>';
-				str += '</div>';
+				str += '</div></a>';
 			gfx.append(str);
 		}
 
-		$(".menuItem").hover(
+		/*$(".menuItem").hover(
 		function() {
 			$(this).css({
 				"z-index": 10
@@ -136,15 +146,36 @@ $(document).ready(function() {
 			$(this).css({
 				"z-index": 1
 			});
-		}
-		)
+		});*/
+
+		
+		$(".menuItem").mouseenter(function() {
+			$(this).find(".menuItem-btn").each(function() {
+				$(this).animate({
+					opacity: 1
+				})
+			})
+		});
+
+		$(".menuItem").mouseleave(function() {
+			$(this).find(".menuItem-btn").each(function() {
+				$(this).animate({
+					opacity: 0
+				})
+			})
+		});
+		
+		$(".menuItem").stardust();
 	}
 
-	function SVG(tag) {
+	//$("#starsContainer").stardustBG({ant: 200});
+
+	/*function SVG(tag) {
 	   return document.createElementNS('http://www.w3.org/2000/svg', tag);
-	}
+	}*/
 
-	var $svg = $('#circles');
+
+	/*var $svg = $('#circles');
 	$(SVG('circle'))
 		.attr('cx', 130)
 	    .attr('cy', 75)
@@ -155,12 +186,49 @@ $(document).ready(function() {
 
 	$("#circle").animate({
 		'cx': 200
-	}, 2000);
+	}, 2000);*/
+	/*function addSvg(div, element,eldict) { 
+	   el = $(document.createElementNS('http://www.w3.org/2000/svg', element));
+	   el.attr(eldict).appendTo(div);
+	}
+	
+
+	addSvg('#mySVG', 'circle', {cx: 180, cy:110, r:100, fill: "#fff"});*/
+
 
 	var randomNr = function(min, max) {
         return Math.floor(Math.random() * (max - (min) + 1)) + (min);
     }
-	
+
+
+    var current = 0;
+    var old = 0;
+    var looper = function() {
+    	$("#mySVG").animate({
+    		cx: 400
+    	})
+    	gfx.find(".menuItem").each(function() {
+    		var nr = $(this).data("nr");
+    		if (nr == current) {
+    			//console.log("nr: "+nr+" > "+current);
+    			$(this).animate({
+    				opacity: 1
+    			}, 2500, function() {
+    				$(this).delay(1000).animate({
+    					opacity: 0.1
+    				}, 1000)
+    			});
+    		}
+    	});
+
+    	if (current < (gfx.children().length-1)) {
+    		current++;
+    	} else {
+    		current = 0;
+    	}
+    }
+
+	//old loop
 	var loop = function() {
 		var i = 0;
 		gfx.find(".menuItem").each(function() {
@@ -188,8 +256,14 @@ $(document).ready(function() {
 		})
 	}
 	
-	//var timer = setInterval(loop, speeder);
+	//
 	
 
 	init();
+	timer = setInterval(looper, speeder);
+	looper();
+	/*
+	
+
+	*/
 });
