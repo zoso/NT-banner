@@ -2,7 +2,6 @@
 	border: 1px solid #000;
 }
 
-
 @canvas-width: 940px;
 @light-blue: #048fd4;
 @din-font: "ff-din-web",sans-serif;
@@ -20,7 +19,7 @@ body {
 }
 
 img {
-	border: none;
+	border: 0;
 }
 
 #wrapper {
@@ -30,7 +29,7 @@ img {
 
 #backgroundContainer {
 	position: absolute;
-	margin-top: 110px;
+	margin-top: 120px;
 	width: 100%;
 	min-width: 1024px;
 	background: url(../img/banner_bg.jpg) 50% 0 no-repeat;
@@ -41,7 +40,7 @@ img {
 
 #gfxContainer {
 	position: absolute;
-	/*width: 100%;*/
+	width: @canvas-width;
 	height: 450px;
 	/*margin-left: (1280-@canvas-width)/2px;*/
 }
@@ -51,16 +50,24 @@ img {
 	margin-top: 450px;
 }
 
+#banner-txt {
+	position: absolute; 
+	top: 220px; 
+	width: 422px; 
+	height: 142px; 
+	background: url(../img/det_er_alltid.png) 0 0 no-repeat;
+}
+
 .menuItem {
 	width: 270px;
 	height: 270px;
 	position: absolute;
 	/*cursor: pointer;*/
-	opacity: 0;	
+	
 }
 
 .menuItem-over {
-	opacity: 0.3;
+	
 	.img {
 		margin-top: 3px;
 		margin-left: 3px;
@@ -114,6 +121,10 @@ img {
 
 .play-txt a:hover {
 	color: @light-blue;
+}
+
+.hidden {
+	display: none;
 }
 
 

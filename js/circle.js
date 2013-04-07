@@ -61,7 +61,7 @@ function onEnterFrame(event:Event):void {
 
 $(document).ready(function() {
 	var dim = 270;
-
+	$("#log").html("Denne animasjonen bruker opacity. Browseren din støtter dette? "+jQuery.support.opacity);
 
 	var w = $(window).width();
 	var menuArr = [
