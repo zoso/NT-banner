@@ -1,49 +1,49 @@
 $(document).ready(function() {
-	//http://tympanus.net/codrops/2011/12/14/item-blur-effect-with-css3-and-jquery/
-	//http://motyar.blogspot.no/2010/03/dream-night-animation-with-jquery.html
+	for(var i in console) {
+	    console.log(i);
+	}
 	var support = jQuery.support.opacity;
 	var w = $(window).width();
 	var gfx = $("#gfxContainer");
-	$("#log").html("Denne animasjonen bruker opacity. Browseren din støtter dette? "+support);
+	log("Denne animasjonen bruker opacity. Browseren din støtter dette? "+support);
 	function log(m) {
-		//l.append("<br>"+str);
-		window.console && console.log(m) || alert(m); 
+		window.console && console.log(m);// || alert(m); 
 	}
 	var menuArr = [
 		{
-			img: "img/danser_round_img.png",
+			img: "img/film-bilde-2.png",
 			pos: [0, 720, 50, -50],
 			url: "#danser",
 			txt: "Magedanserinnen"
 		},
 		{
-			img: "img/familie_round_img.png",
-			url: "#familie",
+			img: "img/film-bilde-3.png",
+			url: "#lottofamilie",
 			pos: [160, 560, 150, -10],
 			txt: "Lottofamilien"
 		},
 		{
-			img: "img/odds_round_img.png",
-			url: "#odds",
+			img: "img/film-bilde-4.png",
+			url: "#ildsjel",
 			pos: [-40, 390, 100, -20],
 			txt: "Årets ildsjel"
 		},
 		{
-			img: "img/gull_round_img.png",
-			url: "#gull",
+			img: "img/film-bilde-5.png",
+			url: "#kommisjonær",
 			pos: [250, -50, 80, -40],
 			txt: "Årets kommisjonær"
 		},
 		{
-			img: "img/hadjik_round_img.png",
-			url: "#Hadjik",
+			img: "img/film-bilde-1.png",
+			url: "#bjorgen",
 			pos: [200, 300, 140, -50],
 			txt: "Selveste ski-filmen"
 		}
 	];
 	var timer = null;
 	var speeder = 3000;
-
+	
 	var init = function() {
 		for (var i = 0; i < menuArr.length; i++) {
 			var top = menuArr[i].pos[0];
@@ -58,45 +58,61 @@ $(document).ready(function() {
 
 			if (support) {
 				$(".menuItem").css("opacity", 0);
+				$(".menuItem-btn").css("opacity", 0);
+				$(".menuItem").hide();
 			} else {
-				$(".menuItem-btn").hide();
+				$(".menuItem-btn").hide(); //ie8
 			}
 		}
 
 		if (support) {
 			$(".menuItem").stardust();
+			$("#starsContainer").stardustBG({ant: 50, loop: true});
 			timer = setInterval(loop, speeder);
 		}
 
 		$(".menuItem").on("mouseenter", function() {
 			$(this).find(".menuItem-btn").each(function() {
-				$(this).show(100);
+				if (support) {
+					$(this).show().animate({
+						opacity: 1
+					}, 1000);
+				} else {
+					$(this).show(100);
+				}
+				
 			})
 		});
 		$(".menuItem").on("mouseleave", function() {
 			$(this).find(".menuItem-btn").each(function() {
-				$(this).hide(100);
+				if (support) {
+					$(this).animate({
+						opacity: 0
+					}, 200, function() {
+						$(this).hide();
+					})
+				} else {
+					$(this).hide(100);
+				}
 			})
 		});
 		$(".menuItem").on("click", function() {
-			log("> "+$(this).data("nr"));
+			var id = parseInt($(this).data("nr"));
+			log("> "+id+" > "+menuArr[id].url);
 		});
-
 	}
 
 	var i = 0;
 	var loop = function() {
 		gfx.find(".menuItem").each(function(j) {
 			if (j == i) {
-				//console.log("hit i "+i +" > "+j );
-				$(this).show();
-				$(this).animate({
+				$(this).show().stop().animate({
 					opacity: 1
 				}, 1000);
 			} else {
 				$(this).animate({
 					opacity: 0
-				}, 500, function() {
+				}, 1500, function() {
 					$(this).hide();
 				});
 			}

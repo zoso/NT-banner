@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	//http://tympanus.net/codrops/2011/12/14/item-blur-effect-with-css3-and-jquery/
+	//http://motyar.blogspot.no/2010/03/dream-night-animation-with-jquery.html
 	var menuArr = [
 		{
 			img: "img/danser_round_img.png",
