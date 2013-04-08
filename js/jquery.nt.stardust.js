@@ -24,6 +24,13 @@
         return Math.floor(Math.random() * (max - (min) + 1)) + (min);
     }
 
+    var randNegPos = function(nr) {
+        var random = Math.floor(Math.random()*199) - 99;
+        if(random == 0) return randNegPos();
+        return random;
+    }
+
+
     var starArr = [];
     function addStars(el, x, y) {
         var ant = randomNr(defaultSettings.min, defaultSettings.max);
@@ -74,7 +81,8 @@
 
     var defaultBgSettings = {
         ant: 20,
-        loop: false
+        loop: false,
+        loopSpeed: 4000
     };
 
     var w = $(window).width();
@@ -85,9 +93,10 @@
 
     /* testing mouseMove */
     var mousePos = {x: 1, y: 1};
-    $(document).mousemove(function(e) {
+    $("#bannerContainer").mousemove(function(e) {
         mousePos.x = e.pageX;
         mousePos.y = e.pageY;
+        $("#log").html("x "+mousePos.x+" y "+mousePos.y);
     })
     //init
     $.fn.stardustBG = function(settings) {
@@ -112,17 +121,16 @@
         var starloop = function() {
             container.children().each(function(i) {
                 if ($(this).attr('style') != undefined) {
-                    //var l = parseInt($(this).css('left'));
-                    //var t = parseInt($(this).css('top'));
-                    var o = 1;//randomNr(1,10)/10;
-                    //var l = randomNr(10, 150);
-                    //console.log("r: "+r+" > "+(l+(r)));
-                    var l = randomNr(10, (w-100));
-                    var t = randomNr(0, 400);
-                    /*var parentOffset = $(this).offset();
-                    var l = Math.round($(this).pageX-parentOffset.left)-20;
-                    var t = Math.round($(this).pageY-parentOffset.top)-20;*/
-                    //if (l+(r) > 900) l = 100;
+                    var o = 1;
+                    var l = 0;
+                    var t = 0;
+                    if (i%3 == 0) {
+                        l = randNegPos() + mousePos.x;
+                        t = randNegPos() + mousePos.y - 115;
+                    } else {
+                        l = randomNr(10, (w-100));
+                        t = randomNr(0, 400);
+                    }
                     $(this).animate({
                         left: l,
                         top: t,
@@ -132,7 +140,7 @@
             });
         }
         if (defaultBgSettings.loop == true)
-            var loopTimer = setInterval(starloop, 4000);
+            var loopTimer = setInterval(starloop, defaultBgSettings.loopSpeed);
             starloop();
     };
 

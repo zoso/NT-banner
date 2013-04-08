@@ -65,7 +65,7 @@ $(document).ready(function() {
 
 		if (support) {
 			$(".menuItem").stardust();
-			$("#starsContainer").stardustBG({ant: 40, loop: true});
+			$("#starsContainer").stardustBG({ant: 50, loop: true, loopSpeed: 4000});
 			timer = setInterval(loop, speeder);
 		}
 

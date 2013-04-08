@@ -3,6 +3,7 @@ img{border:0;}
 #wrapper{width:940px;margin:0 auto;}
 #backgroundContainer{position:absolute;margin-top:115px;width:100%;min-width:1024px;background:url(../img/banner_bg.jpg) 50% 0 no-repeat;background-color:#179bd9;height:450px;}
 #bannerContainer{position:absolute;z-index:1;}
+#log{position:fixed;width:100px;z-index:2000;left:10px;top:10px;}
 #gfxWrapper{position:absolute;left:-100px;width:1100px;height:450px;overflow:hidden;}
 #gfxContainer{position:absolute;left:100px;width:940px;height:450px;z-index:1;}
 #stats{position:relative;margin-top:450px;}
