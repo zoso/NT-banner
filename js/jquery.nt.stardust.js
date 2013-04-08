@@ -77,6 +77,12 @@
         loop: false
     };
 
+    var w = $(window).width();
+    
+    $(window).resize(function() {
+        w = $(window).width();
+    });
+
     /* testing mouseMove */
     var mousePos = {x: 1, y: 1};
     $(document).mousemove(function(e) {
@@ -87,7 +93,7 @@
     $.fn.stardustBG = function(settings) {
         defaultBgSettings = $.extend({}, defaultBgSettings, settings || {});
         var container = this;
-        var w = $(window).width();
+        
         var startLeft = randomNr(10, (w-100));
         var startTop = 450; 
         var str = '';

@@ -10,30 +10,30 @@ $(document).ready(function() {
 		{
 			img: "img/film-bilde-2.png",
 			pos: [10, 720, 90, -50],
-			url: "#danser",
+			url: "http://2012.norsk-tipping.no/aktuelt/drmmetreffet/",
 			txt: "Magedanserinnen"
 		},
 		{
 			img: "img/film-bilde-3.png",
-			url: "#lottofamilie",
+			url: "http://2012.norsk-tipping.no/aktuelt/trippel-lykke/",
 			pos: [175, 570, 160, 190],
 			txt: "Lottofamilien"
 		},
 		{
 			img: "img/film-bilde-4.png",
-			url: "#ildsjel",
+			url: "http://2012.norsk-tipping.no/aktuelt/han-har-trent-flere-tusen-fotballspillere/",
 			pos: [220, 290, 60, -50],
 			txt: "Årets ildsjel"
 		},
 		{
 			img: "img/film-bilde-5.png",
-			url: "#kommisjonær",
+			url: "http://2012.norsk-tipping.no/aktuelt/gullfeber-pa-madla/",
 			pos: [255, -50, 105, -40],
 			txt: "Årets kommisjonær"
 		},
 		{
 			img: "img/film-bilde-1.png",
-			url: "#bjorgen",
+			url: "",
 			pos: [-50, 405, 60, -50],
 			txt: "Selveste ski-filmen"
 		}
@@ -55,9 +55,9 @@ $(document).ready(function() {
 			gfx.append(str);
 
 			if (support) {
-				/*$(".menuItem").css("opacity", 0);
+				$(".menuItem").css("opacity", 0);
 				$(".menuItem-btn").css("opacity", 0);
-				$(".menuItem").hide();*/
+				$(".menuItem").hide();
 			} else {
 				//$(".menuItem-btn").hide(); //ie8
 			}
@@ -66,7 +66,7 @@ $(document).ready(function() {
 		if (support) {
 			$(".menuItem").stardust();
 			$("#starsContainer").stardustBG({ant: 40, loop: true});
-			//timer = setInterval(loop, speeder);
+			timer = setInterval(loop, speeder);
 		}
 
 		/*$(".menuItem").on("mouseenter", function() {
@@ -97,6 +97,7 @@ $(document).ready(function() {
 		$(".menuItem").on("click", function() {
 			var id = parseInt($(this).data("nr"));
 			log("> "+id+" > "+menuArr[id].url);
+			window.open(menuArr[id].url, '_self');
 		});
 	}
 
