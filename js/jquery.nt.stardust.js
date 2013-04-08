@@ -47,7 +47,7 @@
         var s = el.find(".starsContainer");
         var ant = s.children().length-1;
         //var list = s.children().not('.star_cluster');
-        s.each(function(i, elm) {
+        s.children().each(function(i, elm) {
             $(elm).animate({
                 left: starArr[i].left+"px",
                 top: starArr[i].top+"px"
