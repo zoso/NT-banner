@@ -77,6 +77,12 @@
         loop: false
     };
 
+    /* testing mouseMove */
+    var mousePos = {x: 1, y: 1};
+    $(document).mousemove(function(e) {
+        mousePos.x = e.pageX;
+        mousePos.y = e.pageY;
+    })
     //init
     $.fn.stardustBG = function(settings) {
         defaultBgSettings = $.extend({}, defaultBgSettings, settings || {});
@@ -102,22 +108,26 @@
                 if ($(this).attr('style') != undefined) {
                     //var l = parseInt($(this).css('left'));
                     //var t = parseInt($(this).css('top'));
-                    var o = randomNr(1,10)/10;
+                    var o = 1;//randomNr(1,10)/10;
                     //var l = randomNr(10, 150);
                     //console.log("r: "+r+" > "+(l+(r)));
                     var l = randomNr(10, (w-100));
                     var t = randomNr(0, 400);
+                    /*var parentOffset = $(this).offset();
+                    var l = Math.round($(this).pageX-parentOffset.left)-20;
+                    var t = Math.round($(this).pageY-parentOffset.top)-20;*/
                     //if (l+(r) > 900) l = 100;
                     $(this).animate({
                         left: l,
                         top: t,
                         opacity: o
-                    }, randomNr(10, 3000))
+                    }, randomNr(100, 3000))
                 }
             });
         }
         if (defaultBgSettings.loop == true)
             var loopTimer = setInterval(starloop, 4000);
+            starloop();
     };
 
     var element;

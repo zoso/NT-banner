@@ -1,7 +1,4 @@
 $(document).ready(function() {
-	for(var i in console) {
-	    console.log(i);
-	}
 	var support = jQuery.support.opacity;
 	var w = $(window).width();
 	var gfx = $("#gfxContainer");
@@ -12,32 +9,32 @@ $(document).ready(function() {
 	var menuArr = [
 		{
 			img: "img/film-bilde-2.png",
-			pos: [0, 720, 50, -50],
+			pos: [10, 720, 90, -50],
 			url: "#danser",
 			txt: "Magedanserinnen"
 		},
 		{
 			img: "img/film-bilde-3.png",
 			url: "#lottofamilie",
-			pos: [160, 560, 150, -10],
+			pos: [175, 570, 160, 190],
 			txt: "Lottofamilien"
 		},
 		{
 			img: "img/film-bilde-4.png",
 			url: "#ildsjel",
-			pos: [-40, 390, 100, -20],
+			pos: [220, 290, 60, -50],
 			txt: "Årets ildsjel"
 		},
 		{
 			img: "img/film-bilde-5.png",
 			url: "#kommisjonær",
-			pos: [250, -50, 80, -40],
+			pos: [255, -50, 105, -40],
 			txt: "Årets kommisjonær"
 		},
 		{
 			img: "img/film-bilde-1.png",
 			url: "#bjorgen",
-			pos: [200, 300, 140, -50],
+			pos: [-50, 405, 60, -50],
 			txt: "Selveste ski-filmen"
 		}
 	];
@@ -49,29 +46,30 @@ $(document).ready(function() {
 			var top = menuArr[i].pos[0];
 			var left = menuArr[i].pos[1];
 			var str = '<a href="#"><div data-nr="'+i+'" class="menuItem" style="top: '+top+'px; left: '+left+'px;">';
-				str += '<div class="menuItem-btn hidden" data-nr="'+i+'" style="top: '+menuArr[i].pos[2]+'px; left: '+menuArr[i].pos[3]+'px;">';
+				str += '<div class="menuItem-btn" data-nr="'+i+'" style="top: '+menuArr[i].pos[2]+'px; left: '+menuArr[i].pos[3]+'px;">';
 				str += '<div class="play-btn">&nbsp;</div>';
-				str += '<div class="play-txt play-txt-right">'+menuArr[i].txt+'<br>Se film</div></div>';
+				//str += '<div class="play-txt play-txt-right">'+menuArr[i].txt+'<br>Se film</div></div>';
+				str += '</div>';
 				str += '<div class="img"><img src="'+menuArr[i].img+'" /></div>';
 				str += '</div></a>';
 			gfx.append(str);
 
 			if (support) {
-				$(".menuItem").css("opacity", 0);
+				/*$(".menuItem").css("opacity", 0);
 				$(".menuItem-btn").css("opacity", 0);
-				$(".menuItem").hide();
+				$(".menuItem").hide();*/
 			} else {
-				$(".menuItem-btn").hide(); //ie8
+				//$(".menuItem-btn").hide(); //ie8
 			}
 		}
 
 		if (support) {
 			$(".menuItem").stardust();
-			$("#starsContainer").stardustBG({ant: 50, loop: true});
-			timer = setInterval(loop, speeder);
+			$("#starsContainer").stardustBG({ant: 40, loop: true});
+			//timer = setInterval(loop, speeder);
 		}
 
-		$(".menuItem").on("mouseenter", function() {
+		/*$(".menuItem").on("mouseenter", function() {
 			$(this).find(".menuItem-btn").each(function() {
 				if (support) {
 					$(this).show().animate({
@@ -95,7 +93,7 @@ $(document).ready(function() {
 					$(this).hide(100);
 				}
 			})
-		});
+		});*/
 		$(".menuItem").on("click", function() {
 			var id = parseInt($(this).data("nr"));
 			log("> "+id+" > "+menuArr[id].url);
@@ -106,6 +104,9 @@ $(document).ready(function() {
 	var loop = function() {
 		gfx.find(".menuItem").each(function(j) {
 			if (j == i) {
+				var play = $(this).find(".menuItem-btn").each(function() {
+					$(this).show().css("opacity", 1);
+				});
 				$(this).show().stop().animate({
 					opacity: 1
 				}, 1000);

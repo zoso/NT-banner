@@ -29,20 +29,34 @@ img {
 
 #backgroundContainer {
 	position: absolute;
-	margin-top: 120px;
+	margin-top: 115px;
 	width: 100%;
 	min-width: 1024px;
 	background: url(../img/banner_bg.jpg) 50% 0 no-repeat;
 	background-color: @bgColor;
 	height: 450px;
-	
+}
+
+#bannerContainer {
+	position: absolute;
+	z-index: 1;
+}
+
+
+#gfxWrapper {
+	position: absolute;
+	left: -100px;
+	width: 1100px;
+	height: 450px;
+	overflow-y: hidden;
 }
 
 #gfxContainer {
 	position: absolute;
+	left: 100px;
 	width: @canvas-width;
 	height: 450px;
-	/*margin-left: (1280-@canvas-width)/2px;*/
+	z-index: 1;
 }
 
 #stats {
@@ -52,22 +66,23 @@ img {
 
 #banner-txt {
 	position: absolute; 
-	top: 220px; 
+	top: 100px; 
 	width: 422px; 
 	height: 142px; 
 	background: url(../img/det_er_alltid.png) 0 0 no-repeat;
+	z-index: 2;
 }
 
 .menuItem {
 	width: 270px;
 	height: 270px;
 	position: absolute;
+	z-index: 2;
 	/*cursor: pointer;*/
 	
 }
 
 .menuItem-over {
-	
 	.img {
 		margin-top: 3px;
 		margin-left: 3px;
@@ -78,7 +93,7 @@ img {
 	position: absolute;
 	width: 200px;
 	height: 100px;
-	z-index: 1000;
+	
 }
 
 .play-btn {
@@ -121,10 +136,6 @@ img {
 
 .play-txt a:hover {
 	color: @light-blue;
-}
-
-.hidden {
-	display: none;
 }
 
 
@@ -229,12 +240,12 @@ img {
 	.sprite(6,1);
 }
 
-.star_cluster {
+/*.star_cluster {
 	width: 399px;
 	height: 270px;
 	position: absolute;
 	background: url(../img/stars/star_small4.png) no-repeat;
-}
+}*/
 
 .starsContainer {
 	position: absolute; 
