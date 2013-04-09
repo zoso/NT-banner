@@ -94,6 +94,7 @@ $(document).ready(function() {
 				}
 			})
 		});*/
+
 		$(".menuItem").on("click", function() {
 			var id = parseInt($(this).data("nr"));
 			log("> "+id+" > "+menuArr[id].url);

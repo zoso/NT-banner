@@ -12,7 +12,14 @@
                     "star_small10",
                     "star_small11",
                     "star_small12",
-                    "star_small13"
+                    "star_small13",
+                    "star_small14",
+                    "star_small15",
+                    "star_small16",
+                    "star_small17",
+                    "star_small18",
+                    "star_small19",
+                    "star_small20"
                     ];
     
     function getClass() {
@@ -131,6 +138,7 @@
                         l = randomNr(10, (w-100));
                         t = randomNr(0, 400);
                     }
+                    if (l > 900) l = l-(randomNr(0,100));
                     $(this).animate({
                         left: l,
                         top: t,

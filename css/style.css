@@ -31,4 +31,11 @@ img{border:0;}
 .star_small11{width:50px;height:50px;position:absolute;background:url(../img/stars/stars.png) no-repeat;background-position:-200px -50px;}
 .star_small12{width:50px;height:50px;position:absolute;background:url(../img/stars/stars.png) no-repeat;background-position:-250px -50px;}
 .star_small13{width:50px;height:50px;position:absolute;background:url(../img/stars/stars.png) no-repeat;background-position:-300px -50px;}
+.star_small14{width:50px;height:50px;position:absolute;background:url(../img/stars/stars.png) no-repeat;background-position:0px -100px;}
+.star_small15{width:50px;height:50px;position:absolute;background:url(../img/stars/stars.png) no-repeat;background-position:-50px -100px;}
+.star_small16{width:50px;height:50px;position:absolute;background:url(../img/stars/stars.png) no-repeat;background-position:-100px -100px;}
+.star_small17{width:50px;height:50px;position:absolute;background:url(../img/stars/stars.png) no-repeat;background-position:-150px -100px;}
+.star_small18{width:50px;height:50px;position:absolute;background:url(../img/stars/stars.png) no-repeat;background-position:-200px -100px;}
+.star_small19{width:50px;height:50px;position:absolute;background:url(../img/stars/stars.png) no-repeat;background-position:-250px -100px;}
+.star_small20{width:50px;height:50px;position:absolute;background:url(../img/stars/stars.png) no-repeat;background-position:-300px -100px;}
 .starsContainer{position:absolute;top:0;left:0;}
